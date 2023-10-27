@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   # Login user
   post "/login", to: "login#create"
 
+  #Apply job
+  post "/apply", to: "job_applications#create"
+
 
 
   # Defines the root path route ("/")
