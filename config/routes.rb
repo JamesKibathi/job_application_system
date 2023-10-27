@@ -6,6 +6,9 @@ Rails.application.routes.draw do
 
   resources :jobs
 
+  # Login user
+  post "/login", to: "login#create"
+
 
 
   # Defines the root path route ("/")
