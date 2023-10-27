@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   resources :profiles
 
+  resources :jobs
+
 
 
   # Defines the root path route ("/")
