@@ -6,11 +6,14 @@ Rails.application.routes.draw do
 
   resources :jobs
 
+  # resources :job_applications
+
   # Login user
   post "/login", to: "login#create"
 
   #Apply job
   post "/apply", to: "job_applications#create"
+  get "/applications", to: "job_applications#index"
 
 
 
