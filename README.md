@@ -56,10 +56,17 @@ $ git remote rm origin
 You can then run the following commands to get started:
 
 ```
-$ bundle install - to install Ruby Gems (dependencies)
-$ rails db:migrate - to run migrations
-$ rails db:seed - to add seed data
-$ rails s - to run server
+1.Install Ruby Gems (dependencies)
+$ bundle install 
+
+2.Run migrations
+$ rails db:migrate 
+
+3.Seed data 
+$ rails db:seed 
+
+4.Run server
+$ rails s 
 ```
 
 ## End points
