@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :invalid_user_details 
 
+    skip_before_action :authenticate_user
     def index
         users = User.all
         render json: users
