@@ -1,6 +1,8 @@
 class JobsController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid , with: :job_not_created
 
+    before_action :authenticate_user
+    
     def index
         jobs = Job.all
         render json: jobs 
