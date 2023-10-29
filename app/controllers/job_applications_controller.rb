@@ -1,22 +1,20 @@
 class JobApplicationsController < ApplicationController
 
-  before_action :authenticate_user, only: [:create]
+  before_action :authenticate_user
 
   def create
-    # Check if user authenticated
-    if user_authenticated?
+   
     @job_application = JobApplication.new(job_id: params[:job_id], user_id: @current_user.id)
 
     if @job_application.save
+
       render json: @job_application, status: :created
       
     else
       render json: @job_application.errors, status: :unprocessable_entity
 
     end
-    else
-      render_unauthorized('User not logged in')
-    end
+  
   end
 
   def index
@@ -24,44 +22,5 @@ class JobApplicationsController < ApplicationController
       render json: {Greetings:"Hello son"}
   end
 
-
-  private
-
- 
-  def authenticate_user
-
-    token = request.headers['Authorization']&.split(' ')&.last
-    secret_key = ENV['JWT_SECRET_KEY']
-
-    unless token
-      render_unauthorized('Unauthorized: Missing token')
-      return
-    end
-
-    # return false unless token
-    begin
-      decoded = JWT.decode(token, secret_key, true, algorithm: 'HS256')
-      user_id = decoded[0]['user_id']
-      @current_user = User.find(user_id)
-     
-      # Check if the user exists and is valid
-    rescue JWT::DecodeError
-      @current_user = nil
-    end
-
-    unless user_authenticated?
-
-    render_unauthorized('Unauthorized: Invalid token or User not found') 
-    end
-  end
-
-
-  def user_authenticated?
-    !!@current_user
-  end
-
-  def render_unauthorized(message)
-    render json: { error: message }, status: :unauthorized
-  end
 
 end

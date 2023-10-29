@@ -1,12 +1,11 @@
 class JobApplicationsController < ApplicationController
 
   before_action :authenticate_user, only: [:create]
-  before_action :set_job
 
   def create
-    # Handle user job applications
-
-    @job_application = @job.job_applications.new(user: current_user)
+    # Check if user authenticated
+    if user_authenticated?
+    @job_application = JobApplication.new(job_id: params[:job_id], user_id: @current_user.id)
 
     if @job_application.save
       render json: @job_application, status: :created
@@ -14,6 +13,9 @@ class JobApplicationsController < ApplicationController
     else
       render json: @job_application.errors, status: :unprocessable_entity
 
+    end
+    else
+      render_unauthorized('User not logged in')
     end
   end
 
@@ -25,43 +27,41 @@ class JobApplicationsController < ApplicationController
 
   private
 
-  def job_application_params
-    params.require(:job_application).permit(:job_id)
-  end
-
+ 
   def authenticate_user
 
-    unless user_authenticated?
-
-      render json: {error:'Unauthorized'}, status: :unauthorized
-
-    end
-  end
-
-  def user_authenticated?
-
-    token = request.headers['Authorization']&.split('')&.last
+    token = request.headers['Authorization']&.split(' ')&.last
     secret_key = ENV['JWT_SECRET_KEY']
+
+    unless token
+      render_unauthorized('Unauthorized: Missing token')
+      return
+    end
 
     # return false unless token
     begin
       decoded = JWT.decode(token, secret_key, true, algorithm: 'HS256')
       user_id = decoded[0]['user_id']
       @current_user = User.find(user_id)
+     
       # Check if the user exists and is valid
     rescue JWT::DecodeError
       @current_user = nil
-      render_unauthorized('Invalid or expired token')
     end
+
+    unless user_authenticated?
+
+    render_unauthorized('Unauthorized: Invalid token or User not found') 
+    end
+  end
+
+
+  def user_authenticated?
+    !!@current_user
   end
 
   def render_unauthorized(message)
     render json: { error: message }, status: :unauthorized
-  end
-
-
-  def set_job
-    @job = Job.find(params[:job_id])
   end
 
 end
