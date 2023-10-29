@@ -17,9 +17,16 @@ class ProfilesController < ApplicationController
         render json: find_profile_by_id
     end
 
+    def update
+        profile = @current_user.profile
+        if profile
+            profile.update(profile_params)
+            render json: profile
+        else
+            render json: {Error:"profile not found"}, status: :not_found
+        end
+    end
 
-
-    
     private
 
     def find_profile_by_id
