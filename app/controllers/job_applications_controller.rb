@@ -1,6 +1,6 @@
 class JobApplicationsController < ApplicationController
 
-  before_action :authenticate_user
+  before_action :authenticate_user, only: [:create]
 
   def create
    
@@ -19,7 +19,8 @@ class JobApplicationsController < ApplicationController
 
   def index
       # List user's job applications
-      render json: {Greetings:"Hello son"}
+     applied = JobApplication.all
+     render json: applied
   end
 
 
