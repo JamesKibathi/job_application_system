@@ -79,13 +79,20 @@ $ rails s
   GET http://127.0.0.1:3000/jobs
 
   # Applicant Profile set up - resume 
-  POST http://127.0.0.1:3000/profiles/#{id}
+  POST http://127.0.0.1:3000/profiles
+
+  # Update User Profile
+  PATCH http://127.0.0.1:3000/profiles/#{id}
 
   # Applicant Login
   POST http://127.0.0.1:3000/login
 
   # Apply Job
   POST http://127.0.0.1:3000/apply
+
+  # Display All Job Applications
+  GET http://127.0.0.1:3000/applications
+
 
   # Show Applicants Details & Jobs Applied
   GET http://127.0.0.1:3000/users
