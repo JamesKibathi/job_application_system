@@ -13,7 +13,7 @@ class LoginController < ApplicationController
 
             token = JWT.encode(payload,secret_key, 'HS256')
 
-            render json:{token: token}, status: :accepted
+            render json:{user: user, token: token}, status: :accepted
         else
             render json: {error:"invalid username or password"}, status: :unauthorized
         end
