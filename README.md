@@ -2,7 +2,7 @@
 
 -This is a backend API that helps hiring agencies to keep track of different job opportunities and applicants. 
 
-VIDEO DEMO
+API DEMO
 
 ![](https://github.com/JamesKibathi/job_application_system/blob/main/Jobs%20Application%20API.gif)
 
