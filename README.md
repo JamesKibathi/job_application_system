@@ -4,7 +4,7 @@
 
 VIDEO DEMO
 
-![caption](https://drive.google.com/file/d/1iLQa4HYPTDRj20YLFDXlSLJOyjfCBksT/view?usp=sharing)
+![](https://github.com/JamesKibathi/job_application_system/blob/main/Jobs%20Application%20API.gif)
 
 
 ## Table of contents
