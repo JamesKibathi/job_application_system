@@ -96,6 +96,9 @@ $ rails s
 
   # Show Applicants Details & Jobs Applied
   GET http://127.0.0.1:3000/users
+
+  # Display specific Applicant Details & Jobs Applied
+  GET http://127.0.0.1:3000/users/#{id}
    
 ```
 
