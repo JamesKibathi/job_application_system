@@ -12,6 +12,11 @@ class UsersController < ApplicationController
         render json: user, status: :created
     end
 
+    def show
+        applicant = User.find(params[:id])
+        render json: applicant
+    end
+
     private
     def user_params
         params.permit(:email,:username,:password,:password_confirmation)
